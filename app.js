@@ -2,7 +2,11 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const port = 3000
-const products = require('./products')
+const apiRoutes = require('./src/routes')
+const dbconnection = require('./src/config/database.config');
+
+const models = require('./src/models')
+app.use(express.json())
 app.use(cors())
 app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin','*');
@@ -10,31 +14,9 @@ app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Methods','Content-Type','Authorization');
     next(); 
 })
-
-app.get('/products', (req, res) => {
-    res.status(200).json({
-        message: 'Success',
-        data: products
-      })
-})
-app.post('/products', (req, res) => {
-    res.status(200).json({
-        message: 'Success',
-        data: 'Data'
-      })
-})
-app.put('/products', (req, res) => {
-    res.status(200).json({
-        message: 'Success',
-        data: 'Data'
-      })
-})
-app.delete('/products', (req, res) => {
-    res.status(200).json({
-        message: 'Success',
-        data: 'Data'
-      })
-})
+dbconnection()
+app.use('/photos/product', express.static('public/uploads'))
+app.use('/', apiRoutes)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
