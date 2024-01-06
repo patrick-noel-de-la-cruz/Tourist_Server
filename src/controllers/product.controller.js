@@ -16,9 +16,23 @@ const getProducts = async (req, res, next) => {
 
 };
 
+const addProduct = async (req, res, next) => {
+    const product = await ProductService.saveProduct(req.body)
+    if(!product) {
+        res.status(404).json({
+            message: 'Products not found'
+        });
+    }
+    res.status(200).json({
+        message: 'Successfully fetched products',
+        data: product
+    });
+
+};
+
 
 const getProductById = async(req, res, next) => {
-    const product = await ProductService.findById(req.params.id)
+    const product = await ProductService.getProductById(req.params.id)
     if(!product) {
         res.status(404).json({
             message: 'Products not found'
@@ -33,5 +47,6 @@ const getProductById = async(req, res, next) => {
 
 module.exports = {
   getProducts,
-  getProductById
+  getProductById,
+  addProduct
 };
