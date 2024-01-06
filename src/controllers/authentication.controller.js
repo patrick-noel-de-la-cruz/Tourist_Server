@@ -32,6 +32,30 @@ const authenticate = async(req, res, next) => {
 
 }
 
+const register = async(req, res, next) => {
+    if(!req.body) {
+        res.status(404).json({
+            message: 'No data'
+        });
+    }
+
+    
+    const user = await UserService.saveUser(req.body)
+    
+    if(!user) {
+        res.status(404).json({
+            message: 'Invalid credentials'
+        });
+    } else {
+        res.status(201).json({
+            message: 'Success',
+            data: user
+        });
+    }
+
+}
+
 module.exports = {
-  authenticate
+  authenticate,
+  register
 };
