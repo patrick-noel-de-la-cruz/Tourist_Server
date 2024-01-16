@@ -6,7 +6,8 @@ const UserService = require('../services/user.service')
 
 const users = [
     {"firstName": "John", "lastName": "Doe", "email":"johndoe@email.com", "password": "password123"},
-    {"firstName": "Grace", "lastName": "Green", "email":"gracegreen@email.com", "password": "password123"}
+    {"firstName": "Grace", "lastName": "Green", "email":"gracegreen@email.com", "password": "password123"},
+    {"firstName": "Patrick", "lastName": "Delacruz", "email":"patrick@email.com", "password": "123456789"}
 ];
 
 const UserSeeder = {
